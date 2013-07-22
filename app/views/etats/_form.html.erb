@@ -1,0 +1,34 @@
+<%= form_for(@etat, :remote => true, :html => { :class => "form-horizontal"}) do |f| %>
+<% if @etat.errors.any? %>
+<div class="alert alert-block alert-error">
+    <h2>Oops !</h2>
+    <ul>
+        <% @etat.errors.full_messages.each do |msg| %>
+        <li>
+            <%= msg %>
+        </li>
+        <% end %>
+    </ul>
+</div>
+<% end %>
+
+<div class="control-group <%= 'error' if @etat.errors[:name].present? %>">
+    <label for="name" class="control-label">Nom</label>
+    <div class="controls">
+        <%= f.text_field :name, :class => "input-small", :maxlength => "50" %>
+    </div>
+</div>
+<div class="control-group <%= 'error' if @etat.errors[:dnssrv].present? %>">
+    <label for="description" class="control-label">Description</label>
+    <div class="controls">
+        <%= f.text_field :description, :class => "input-xlarge", :maxlength => "100" %>
+    </div>
+</div>
+
+<div class="actions">
+    <%= f.submit :class => "btn btn-primary", :value => "Save" %>
+    <%= link_to :back, :remote => true, :type => "reset", :class => "btn" do%>
+        <i class="icon-chevron-left"></i>Cancel
+    <% end %>
+</div>
+<% end %> 

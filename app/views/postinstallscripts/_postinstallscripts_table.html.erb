@@ -1,0 +1,46 @@
+<%= hidden_field_tag :direction, params[:direction] %>
+<%= hidden_field_tag :sort, params[:sort] %>
+
+<table class="table table-striped table-bordered table-condensed sortable">
+    <thead>
+        <tr>
+            <th style="width: 100px;">Nom</th>
+			<th style="width: 100px;">Famille</th>
+            <th style="width: 300px;">Description</th>
+            <th style="width: 40px;"></th>
+        </tr>
+    </thead>
+    <tbody>
+        <% @postinstallscripts.each do |postinstallscript| %>
+        <tr>
+            <td valign="top"> 
+                <%= link_to postinstallscript.name, edit_postinstallscript_path(postinstallscript), :remote => true %> 
+            </td>
+			<td valign="top"> 
+                <%= postinstallscript.famille.name if postinstallscript.famille %> 
+            </td>
+            <td valign="top"> 
+                <%= postinstallscript.description %> 
+            </td>
+            <td valign="top"> 
+                <%= link_to edit_postinstallscript_path(postinstallscript), :remote => true, :style=>'height: 14px;', :title=>'Edit' do%> 
+                    <i class="icon-edit"></i> 
+                <% end %> 
+                
+                <a style="height: 14px; padding-left: 5px;" title="Delete"
+                    data-backdrop="static" data-keyboard="true"
+                    href="javascript:;"
+                    onclick="show_confirm_modal('<%= postinstallscript_path(postinstallscript) %>',
+                    'Are you sure you want to delete the postinstallscript : <%= postinstallscript.name%>');"> 
+                    <i class="icon-remove"></i> 
+                </a>
+             </td>
+        </tr>
+        <% end %>
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="3"> <%= will_paginate @postinstallscript%> </td>
+        </tr>
+    </tfoot>
+</table>

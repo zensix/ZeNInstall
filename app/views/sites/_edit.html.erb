@@ -1,0 +1,14 @@
+<div class="page-header">
+    <div class="logo pull-left">  <%= image_tag('site.png',:width => 50, :height => 50 ) %></div>
+    <div class="pull-right">
+        <%= link_to new_site_path, :remote => true,
+        :class => "btn btn-primary", :style => "margin-right:10px; height:15px;" do%>
+        <i class="icon-plus icon-white"></i> Nouveau Site
+        <% end %>
+    </div>
+</div>
+<div class="row-fluid">
+    <div class="span12">
+        <%= render 'form' %>
+    </div>
+</div>

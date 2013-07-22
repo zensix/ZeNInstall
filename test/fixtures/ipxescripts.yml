@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  name: MyString
+  script: MyText
+  description: MyText
+  famille_id: 1
+
+two:
+  name: MyString
+  script: MyText
+  description: MyText
+  famille_id: 1

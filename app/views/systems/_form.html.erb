@@ -1,0 +1,79 @@
+<%= form_for(@system, :remote => true, :html => { :class => "form-horizontal"}) do |f| %>
+<% if @system.errors.any? %>
+<div class="alert alert-block alert-error">
+    <h2>Oops !</h2>
+    <ul>
+        <% @system.errors.full_messages.each do |msg| %>
+        <li>
+            <%= msg %>
+        </li>
+        <% end %>
+    </ul>
+</div>
+<% end %>
+
+<div class="control-group <%= 'error' if @system.errors[:name].present? %>">
+    <label for="name" class="control-label">Nom</label>
+    <div class="controls">
+        <%= f.text_field :name, :class => "input-xlarge", :maxlength => "50" %>
+    </div>
+</div>
+<div class="control-group <%= 'error' if @system.errors[:famille_id].present? %>">
+    <label for="famille_id" class="control-label">Famille</label>
+            <div class="controls">
+                <%= f.select :famille_id, Famille.all.collect{|c| [ c.name, c.id ] }, :prompt => 'Select Famille' %>
+            </div>
+</div>
+
+<div class="control-group <%= 'error' if @system.errors[:architecture_id].present? %>">
+    <label for="architecture_id" class="control-label">Architecture</label>
+            <div class="controls">
+                <%= f.select :architecture_id, Architecture.all.collect{|c| [ c.name, c.id ] }, :prompt => 'Select Architecture' %>
+            </div>
+</div>
+
+<div class="control-group <%= 'error' if @system.errors[:ipxescript_id].present? %>">
+    <label for="ipxescript_id" class="control-label">IPXE</label>
+            <div class="controls">
+                <%= f.select :ipxescript_id, Ipxescript.all.collect{|c| [ c.name, c.id ] }, :prompt => 'Select IPXE cript' %>
+            </div>
+</div>
+
+<div class="control-group <%= 'error' if @system.errors[:kernelpath].present? %>">
+    <label for="kernelpath" class="control-label">kernelpath</label>
+    <div class="controls">
+        <%= f.text_field :kernelpath, :class => "input-xlarge", :maxlength => "50" %>
+    </div>
+</div>
+
+<div class="control-group <%= 'error' if @system.errors[:initrdpath].present? %>">
+    <label for="initrdpath" class="control-label">initrdpath</label>
+    <div class="controls">
+        <%= f.text_field :initrdpath, :class => "input-xlarge", :maxlength => "50" %>
+    </div>
+</div>
+
+
+<div class="control-group <%= 'error' if @system.errors[:repository].present? %>">
+    <label for="repository" class="control-label">repository</label>
+    <div class="controls">
+        <%= f.text_field :repository, :class => "input-xlarge", :maxlength => "50" %>
+    </div>
+</div>
+
+
+
+<div class="control-group <%= 'error' if @system.errors[:description].present? %>">
+    <label for="description" class="control-label">Description</label>
+    <div class="controls">
+      <%= f.text_area :description, :rows => 2, :cols => 100, :class => "input-xxlarge" %>
+    </div>
+</div>
+
+<div class="actions">
+    <%= f.submit :class => "btn btn-primary", :value => "Save" %>
+    <%= link_to :back, :remote => true, :type => "reset", :class => "btn" do%>
+        <i class="icon-chevron-left"></i>Cancel
+    <% end %>
+</div>
+<% end %> 

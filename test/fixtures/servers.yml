@@ -1,0 +1,33 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  name: MyString
+  uuid: MyString
+  mac: MyString
+  architecture_id: 1
+  site_id: 1
+  status_id: 1
+  system_id: 1
+  postinstallscript_id: 1
+  systeminstallscript_id: 1
+  usedhcp: false
+  useproxy: false
+  currentaddress: MyString
+  destinationaddress: MyString
+  information: MyText
+
+two:
+  name: MyString
+  uuid: MyString
+  mac: MyString
+  architecture_id: 1
+  site_id: 1
+  status_id: 1
+  system_id: 1
+  postinstallscript_id: 1
+  systeminstallscript_id: 1
+  usedhcp: false
+  useproxy: false
+  currentaddress: MyString
+  destinationaddress: MyString
+  information: MyText

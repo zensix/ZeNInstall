@@ -1,0 +1,11 @@
+<h2><%= @title %></h2>
+<h3>Genere par le script d'installation systeme <span style="color:blue"><%= @installscriptcode.name %></span>
+<%= link_to edit_systeminstallscript_path(@installscriptcode), :remote => true, :style=>'height: 14px;', :title=>'Edit' do%> 
+                    <i class="icon-edit"></i> 
+                <% end %> 
+</h3>
+
+<hr>
+<%= simple_format(@script) %>
+
+<hr>

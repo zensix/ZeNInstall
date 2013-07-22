@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>ZenInstall</title>
+        <%= javascript_include_tag "application" %>
+        <%= stylesheet_link_tag    "application" %>
+        <%= csrf_meta_tags %>
+
+        <style type="text/css">
+            html, body {
+                background-color: #eee;
+            }
+
+            body {
+                padding-top: 60px;
+                padding-bottom: 40px;
+            }
+
+            .container > footer p {
+                text-align: center; /* center align it with the container */
+            }
+            .container {
+                width: 1024px;
+            }
+            /* The white background content wrapper */
+            .container > .content {
+                background-color: #fff;
+                padding: 20px;
+                margin: 0 -20px; /* negative indent the amount of the padding to maintain the grid system */
+                -webkit-border-radius: 0 0 6px 6px;
+                -moz-border-radius: 0 0 6px 6px;
+                border-radius: 0 0 6px 6px;
+                -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.15);
+                -moz-box-shadow: 0 1px 2px rgba(0,0,0,.15);
+                box-shadow: 0 1px 2px rgba(0,0,0,.15);
+            }
+            
+            /* Page header tweaks */
+            .page-header {
+                background-color: #f5f5f5;
+                padding: 20px 20px 10px;
+                margin: -20px -20px 20px;
+                height: 40px;                       
+            }
+            
+            /* Give a quick and non-cross-browser friendly divider */
+            .dashboard-divider {
+                margin-left: 0;
+                padding-left: 19px;
+                border-left: 1px solid #eee;
+            }            
+                        
+        </style>
+
+    </head>
+    <body>
+        <div class="navbar navbar-fixed-top">
+            <div class="navbar-inner">
+			
+                <div class="container">
+                    <div class="btn-group pull-right">
+                        <a class="btn dropdown-toggle" href="#" data-toggle="dropdown"> <i class="icon-user"></i> Utilisateur <span class="caret"></span> </a>
+                        <ul class="dropdown-menu">
+						    <li>
+                                <a href="#">Non encore implemeté</a>
+                            </li>
+                            <li>
+                                <a href="#">Profile</a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a href="#">Déconnection</a>
+                            </li>
+                        </ul>
+                       <button class="btn btn-warning" type="button" id="btntest">Test</button>
+                    </div>
+
+                    <div class="nav-collapse">
+                        <ul class="nav">
+                            <li class="active">
+                                <a href="/">ZeNinstall</a>
+                            </li>
+                            <li>
+                                <%= link_to "Serveurs", servers_url%>
+                            </li>
+							<li>
+                                <%= link_to "Systemes", systems_url%>
+                            </li>
+    						 <div class="btn-group pull-left">
+                                <a class="btn dropdown-toggle btn-inverse" href="#" data-toggle="dropdown"> <i class="icon-pencil icon-white"></i> Scripts <span class="caret"></span> </a>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                         <%= link_to "IPXE", ipxescripts_url%>
+                                    </li>
+									<li>
+                                         <%= link_to "Installation OS", systeminstallscripts_url%>
+                                    </li>
+									<li>
+                                         <%= link_to "Post Installation OS", postinstallscripts_url%>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="btn-group pull-left">
+                                <a class="btn dropdown-toggle btn-inverse" href="#" data-toggle="dropdown"> <i class="icon-wrench icon-white"></i> Réglage <span class="caret"></span> </a>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                         <%= link_to "Architectures", architectures_url%>
+                                    </li>
+                                    <li>
+                                        <%= link_to "Familles", familles_url%>
+                                    </li>
+                                    <li>
+                                        <%= link_to "Parametrages", globalparameters_url%>
+                                    </li>
+									 <li>
+                                        <%= link_to "Etats", etats_url%>
+                                    </li>
+                                    <li>
+                                        <%= link_to "Sites", sites_url%>
+                                    </li>
+                                </ul>
+                            </div>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div id ="messages">
+                <%= render '/layouts/messages' %>
+            </div>
+
+            <div id="body_content" class="content">
+                <%= yield %>
+            </div>
+			<div id ="console" >
+               <%= render '/layouts/console' %>
+			   <div id=target></div>
+            </div>
+            <footer>
+				<br />
+				 <%= image_tag('zeninstall.png',:width => 50, :height => 50) %>
+				<ul style="list-style-type: none; margin: 0;">
+			       <li>
+			       		<h4>Credits:</h4>
+			       </li>
+			       <li>
+				       <a href="http://rubyonrails.org/" target="_blank">
+				       Ruby on Rails Web Framework</a>
+			       </li>
+			       <li>
+				       <a href="https://github.com/mislav/will_paginate" target="_blank">
+				       will_paginate Pagination Library</a>
+			       </li>
+			       <li>
+				       <a href="https://github.com/lomba/schema_plus" target="_blank">
+				       SchemaPlus ActiveRecord</a>
+			       </li>
+			       <li>
+				       <a href="http://twitter.github.com/bootstrap/" target="_blank">
+				       Bootstrap, from Twitter CSS and javascript framework</a>
+			       </li>
+			       <li>
+			       		<a href="http://mysql.com" target="_blank">MySQL Database</a>
+			       </li>
+			    </ul>
+		       <br />
+		       <br />
+		       <br />
+		        <p>
+		         ZeNinstall Beta ver: 0.2 Copyright &copy; 2013 Stephane Zenou,
+		        </p>            	
+            </footer>
+        </div>
+        <!-- /container -->
+    </body>
+</html>

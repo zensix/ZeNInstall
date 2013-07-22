@@ -1,0 +1,134 @@
+<%= form_for(@server, :remote => true, :html => { :class => "form-horizontal"} ) do |f| %>
+<% if @server.errors.any? %>
+<div class="alert alert-block alert-error">
+    <h2>Oops !</h2>
+    <ul>
+        <% @server.errors.full_messages.each do |msg| %>
+        <li>
+            <%= msg %>
+        </li>
+        <% end %>
+    </ul>
+</div>
+<% end %>
+<ul class="nav nav-tabs" id="tabs">
+    <li class="active">
+        <a href="#general">General</a>
+    </li>
+    <li class="">
+        <a href="#configinstall">Configuration Installation</a>
+    </li>
+	 <li class="">
+        <a href="#configcible">Configuration Cible</a>
+    </li>
+    <li class="">
+        <a href="#informations">Informations</a>
+    </li>
+</ul>
+<div class="tab-content" id="my-tab-content">
+    <div id="general" class="tab-pane active">
+        <div class="control-group <%= 'error' if @server.errors[:name].present? %>">
+            <label for="company_name" class="control-label"> Nom </label>
+            <div class="controls">
+                <%= f.text_field :name, :class => "input-xlarge", :maxlength => "100" %>
+            </div>
+        </div>
+		<div class="control-group <%= 'error' if @server.errors[:uuid].present? %>">
+            <label for="uuid" class="control-label"> UUID </label>
+            <div class="controls">
+                <%= f.text_field :uuid, :class => "input-xlarge", :maxlength => "100" %>
+            </div>
+        </div>
+		<div class="control-group">
+            <label for="mac" class="control-label"> Max Adresse </label>
+            <div class="controls">
+                <%= f.text_field :mac, :class => "input-xlarge", :maxlength => "100" %>
+            </div>
+        </div>
+		<div class="control-group">
+            <label for="currentaddress" class="control-label"> Adresse Ip Acturl </label>
+            <div class="controls">
+                <%= f.text_field :currentaddress, :class => "input-xlarge", :maxlength => "100" %>
+            </div>
+        </div>
+        <div class="control-group">
+            <label for="architecture_id" class="control-label">Architecture</label>
+            <div class="controls">
+                <%= f.select :architecture_id, Architecture.all.collect{|c| [ c.name, c.id ] }, :prompt => 'Select Architecture' %>
+            </div>
+        </div>
+
+		<div class="control-group">
+            <label for="etat_id" class="control-label">Etat</label>
+            <div class="controls">
+                <%= f.select :etat_id, Etat.all.collect{|c| [ c.name, c.id ] }, :prompt => 'Select Etat' %>
+            </div>
+        </div>
+		
+    </div>
+    <div id="configinstall" class="tab-pane">
+	    <div class="control-group">
+            <label for="system_id" class="control-label">Systeme</label>
+            <div class="controls">
+                <%= f.select :system_id, System.all.collect{|c| [ c.name, c.id ] }, :prompt => 'Select Systeme' %>
+			</div>
+        </div>
+		<div class="control-group">
+            <label for="systeminstallscript_id" class="control-label">Installation Systeme</label>
+            <div class="controls">
+                <%= f.select :systeminstallscript_id, Systeminstallscript.all.collect{|c| [ c.name, c.id ] }, :prompt => 'Select OS install' %>
+			</div>
+        </div>
+		<div class="control-group">
+            <label for="postinstallscript_id" class="control-label">Post install</label>
+            <div class="controls">
+                <%= f.select :postinstallscript_id, Postinstallscript.all.collect{|c| [ c.name, c.id ] }, :prompt => 'Select Post install' %>
+			</div>
+        </div>
+		<div class="control-group">
+            <label for="site_id" class="control-label">Site d'instalation</label>
+            <div class="controls">
+                <%= f.select :site_id, Site.all.collect{|c| [ c.name, c.id ] }, :prompt => 'Select Site' %>
+            </div>
+        </div>
+    </div>   
+    <div id="configcible" class="tab-pane">
+		<div class="control-group">
+            <label for="sitedestination" class="control-label">Site de Destination </label>
+            <div class="controls">
+                <%= f.select :sitedestination, Site.all.collect{|c| [ c.name, c.id ] }, :prompt => 'Select Site Destination' %>
+            </div>
+        </div>
+        <div class="control-group">
+            <label for="destinationaddress" class="control-label">Adresse de destination</label>
+            <div class="controls">
+                <%= f.text_field :destinationaddress, :class => "input-xlarge", :maxlength => "50" %>
+            </div>
+        </div>
+     </div>
+    <div id="informations" class="tab-pane">
+        <div class="control-group">
+            <label for="information" class="control-label">Information</label>
+            <div class="controls">
+                <%= f.text_area :information, :rows => 10, :cols => 40, :class => "input-xxlarge" %>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="actions">
+    <%= f.submit :class => "btn btn-primary", :value => "Save"%>
+        
+    <%= link_to :back, :remote => true, :type => "reset", :class => "btn" do%>
+        <i class="icon-chevron-left"></i>Cancel
+    <% end %>     
+</div>
+<script type="text/javascript">
+    $(function() {
+        $('#tabs a').click(function(e) {
+            e.preventDefault();
+            $(this).tab('show');
+        })
+    })
+
+</script>
+<% end %> 

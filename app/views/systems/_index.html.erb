@@ -1,0 +1,23 @@
+<%= render '/layouts/confirm_modal'%>
+
+<%= form_tag  systems_path, :method => 'get', :id => "ajax_search_form" do %>
+<div class="page-header">
+    <div class="logo pull-left">  <%= image_tag('system.png',:width => 50, :height => 50 ) %></div>
+       <div class="pull-right">
+        <%= link_to new_system_path, :remote => true,
+        :class => "btn btn-primary", :style => "margin-right:10px; height:15px;" do%>
+            <i class="icon-plus icon-white"></i> Nouveau systeme
+        <% end %>
+        
+        <div id="quicksearch" class="search-box">
+            <%= text_field_tag :search, params[:search], :placeholder => "Rechercher"  %>
+        </div>
+        <%= hidden_field_tag :ajax_search, "true" %>
+    </div>
+</div>
+<div class="row-fluid">
+    <div id="table_div" class="span12">
+        <%= render :partial => 'systems_table' %>
+    </div>
+</div>
+<% end %>

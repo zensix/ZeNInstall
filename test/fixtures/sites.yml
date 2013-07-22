@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  name: MyString
+  dnssrv: MyString
+  dnsdomain: MyString
+  netmask: MyString
+  gateway: MyString
+  puppetsrv: MyString
+  proxyurl: MyString
+  ntpsrv: MyString
+  description: MyText
+
+two:
+  name: MyString
+  dnssrv: MyString
+  dnsdomain: MyString
+  netmask: MyString
+  gateway: MyString
+  puppetsrv: MyString
+  proxyurl: MyString
+  ntpsrv: MyString
+  description: MyText

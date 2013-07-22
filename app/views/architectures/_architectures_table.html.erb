@@ -1,0 +1,42 @@
+<%= hidden_field_tag :direction, params[:direction] %>
+<%= hidden_field_tag :sort, params[:sort] %>
+
+<table class="table table-striped table-bordered table-condensed sortable">
+    <thead>
+        <tr>
+            <th style="width: 200px;">Nom</th>
+            <th style="width: 200px;">Description</th>
+            <th style="width: 40px;"></th>
+        </tr>
+    </thead>
+    <tbody>
+        <% @architectures.each do |architecture| %>
+        <tr>
+            <td valign="top"> 
+                <%= link_to architecture.name, edit_architecture_path(architecture), :remote => true %> 
+            </td>
+            <td valign="top"> 
+                <%= architecture.description %> 
+            </td>
+            <td valign="top"> 
+                <%= link_to edit_architecture_path(architecture), :remote => true, :style=>'height: 14px;', :title=>'Edit' do%> 
+                    <i class="icon-edit"></i> 
+                <% end %> 
+                
+                <a style="height: 14px; padding-left: 5px;" title="Delete"
+                    data-backdrop="static" data-keyboard="true"
+                    href="javascript:;"
+                    onclick="show_confirm_modal('<%= architecture_path(architecture) %>',
+                    'Are you sure you want to delete the architecture : <%= architecture.name%>');"> 
+                    <i class="icon-remove"></i> 
+                </a>
+             </td>
+        </tr>
+        <% end %>
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="3"> <%= will_paginate @architecture%> </td>
+        </tr>
+    </tfoot>
+</table>

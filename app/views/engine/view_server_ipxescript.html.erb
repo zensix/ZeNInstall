@@ -1,0 +1,10 @@
+<h2><%= @title %></h2>
+<h3>Genere par le script IPXE <span style="color:blue"><%= @installscriptcode.name %></span>
+<%= link_to edit_ipxescript_path(@installscriptcode), :remote => true, :style=>'height: 14px;', :title=>'Edit' do%> 
+                    <i class="icon-edit"></i> 
+                <% end %> 
+</h3>
+
+<%= simple_format(@script) %>
+
+<hr>
