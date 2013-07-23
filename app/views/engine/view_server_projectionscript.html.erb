@@ -1,0 +1,11 @@
+<h2><%= @title %></h2>
+<h3>Genere projection ysteme <span style="color:blue"><%= @scriptcode.name %></span>
+<%= link_to edit_projectionscript_path(@scriptcode), :remote => true, :style=>'height: 14px;', :title=>'Edit' do%> 
+                    <i class="icon-edit"></i> 
+                <% end %> 
+</h3>
+
+<hr>
+<%= simple_format(@script) %>
+
+<hr>

@@ -18,6 +18,13 @@
         <%= f.text_field :name, :class => "input-small", :maxlength => "50" %>
     </div>
 </div>
+
+<div class="control-group <%= 'error' if @famille.errors[:description].present? %>">
+    <label for="script" class="control-label">Projection</label>
+    <div class="controls">
+       <%= f.select :script, Projectionscript.all.collect{|c| [ c.name, c.id ] }, :prompt => 'Select Projection script' %>
+   </div>
+</div>	
 <div class="control-group <%= 'error' if @famille.errors[:description].present? %>">
     <label for="description" class="control-label">Description</label>
     <div class="controls">

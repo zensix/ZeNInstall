@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130714140613) do
+ActiveRecord::Schema.define(:version => 20130720192509) do
 
   create_table "architectures", :force => true do |t|
     t.string   "name"
@@ -75,6 +75,7 @@ ActiveRecord::Schema.define(:version => 20130714140613) do
     t.text     "description"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+    t.integer  "script"
   end
 
   create_table "globalparameters", :force => true do |t|
@@ -96,6 +97,14 @@ ActiveRecord::Schema.define(:version => 20130714140613) do
     t.foreign_key ["famille_id"], "familles", ["id"], :on_update => :no_action, :on_delete => :no_action
   end
 
+  create_table "logs", :force => true do |t|
+    t.datetime "date"
+    t.string   "crit"
+    t.string   "message"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "postinstallscripts", :force => true do |t|
     t.string   "name"
     t.text     "script"
@@ -105,6 +114,14 @@ ActiveRecord::Schema.define(:version => 20130714140613) do
     t.datetime "updated_at",  :null => false
     t.index ["famille_id"], :name => "index_postinstallscripts_on_famille_id"
     t.foreign_key ["famille_id"], "familles", ["id"], :on_update => :no_action, :on_delete => :no_action
+  end
+
+  create_table "projectionscripts", :force => true do |t|
+    t.string   "name"
+    t.text     "script"
+    t.text     "description"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
   create_table "sites", :force => true do |t|
@@ -117,8 +134,9 @@ ActiveRecord::Schema.define(:version => 20130714140613) do
     t.string   "proxyurl"
     t.string   "ntpsrv"
     t.text     "description"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+    t.string   "snmpcommunity"
   end
 
   create_table "systeminstallscripts", :force => true do |t|
@@ -167,8 +185,11 @@ ActiveRecord::Schema.define(:version => 20130714140613) do
     t.string   "currentaddress"
     t.string   "destinationaddress"
     t.text     "information"
-    t.datetime "created_at",             :null => false
-    t.datetime "updated_at",             :null => false
+    t.datetime "created_at",                     :null => false
+    t.datetime "updated_at",                     :null => false
+    t.text     "lastgeneratedpostinstallsctipt"
+    t.text     "lastgeneratedinstallscript"
+    t.boolean  "configlock"
     t.index ["systeminstallscript_id"], :name => "index_servers_on_systeminstallscript_id"
     t.index ["postinstallscript_id"], :name => "index_servers_on_postinstallscript_id"
     t.index ["system_id"], :name => "index_servers_on_system_id"

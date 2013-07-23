@@ -1,0 +1,42 @@
+<%= hidden_field_tag :direction, params[:direction] %>
+<%= hidden_field_tag :sort, params[:sort] %>
+
+<table class="table table-striped table-bordered table-condensed sortable">
+    <thead>
+        <tr>
+            <th style="width: 100px;">Nom</th>
+            <th style="width: 300px;">Description</th>
+            <th style="width: 40px;"></th>
+        </tr>
+    </thead>
+    <tbody>
+        <% @projectionscripts.each do |projectionscript| %>
+        <tr>
+            <td valign="top"> 
+                <%= link_to projectionscript.name, edit_projectionscript_path(projectionscript), :remote => true %> 
+            </td>
+            <td valign="top"> 
+                <%= projectionscript.description %> 
+            </td>
+            <td valign="top"> 
+                <%= link_to edit_projectionscript_path(projectionscript), :remote => true, :style=>'height: 14px;', :title=>'Edit' do%> 
+                    <i class="icon-edit"></i> 
+                <% end %> 
+                
+                <a style="height: 14px; padding-left: 5px;" title="Delete"
+                    data-backdrop="static" data-keyboard="true"
+                    href="javascript:;"
+                    onclick="show_confirm_modal('<%= projectionscript_path(projectionscript) %>',
+                    'Are you sure you want to delete the projectionscript : <%= projectionscript.name%>');"> 
+                    <i class="icon-remove"></i> 
+                </a>
+             </td>
+        </tr>
+        <% end %>
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="3"> <%= will_paginate @projectionscript%> </td>
+        </tr>
+    </tfoot>
+</table>

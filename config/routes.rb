@@ -33,13 +33,16 @@ CustomeR::Application.routes.draw do
   resources :systeminstallscripts, :only => [:index, :new, :edit, :create, :update, :destroy]
   resources :systems, :only => [:index, :new, :edit, :create, :update, :destroy]
   resources :postinstallscripts, :only => [:index, :new, :edit, :create, :update, :destroy]
+  resources :projectionscripts, :only => [:index, :new, :edit, :create, :update, :destroy]
   resources :servers, :only => [:index, :new, :edit, :create, :update, :destroy]
+  resources :logs, :only => [:index, :new, :edit, :create, :update ]
   
   get "engine/getipxescript"
   get "engine/getosinstallscript"
   get "engine/getpostconfigscript"
   get "engine/setstatusfinish"
   get "engine/getdestinationscript"
+  get "engine/getprojectionscript"
   get "engine/test"
   
   match '/getpostconfigscript/:uuid', :to => 'engine#getpostconfigscript'
@@ -53,6 +56,7 @@ CustomeR::Application.routes.draw do
   match '/view_server_postinstallscript/:id', :to => 'engine#view_server_postconfigscript'
   match '/getdestinationscript/:uuid', :to => 'engine#getdestinationscript'
   match '/view_destinationscript/:id', :to => 'engine#view_destinationscript'
+  match '/view_server_projectionscript/:id', :to => 'engine#view_server_projectionscript'
   match '/engine/test/:id' , :to => 'engine#test'
   match '/test/:id' , :to => 'engine#test'
   

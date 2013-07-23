@@ -24,6 +24,9 @@
     <li class="">
         <a href="#informations">Informations</a>
     </li>
+	<li class="">
+        <a href="#congigstatic">Configuration Statiques</a>
+    </li>
 </ul>
 <div class="tab-content" id="my-tab-content">
     <div id="general" class="tab-pane active">
@@ -36,17 +39,17 @@
 		<div class="control-group <%= 'error' if @server.errors[:uuid].present? %>">
             <label for="uuid" class="control-label"> UUID </label>
             <div class="controls">
-                <%= f.text_field :uuid, :class => "input-xlarge", :maxlength => "100" %>
+                <%= f.text_field :uuid, :class => "input-xlarge", :maxlength => "110" ,disabled: 'disabled' %>
             </div>
         </div>
 		<div class="control-group">
             <label for="mac" class="control-label"> Max Adresse </label>
             <div class="controls">
-                <%= f.text_field :mac, :class => "input-xlarge", :maxlength => "100" %>
+                <%= f.text_field :mac, :class => "input-xlarge", :maxlength => "100" ,disabled: 'disabled'%>
             </div>
         </div>
 		<div class="control-group">
-            <label for="currentaddress" class="control-label"> Adresse Ip Acturl </label>
+            <label for="currentaddress" class="control-label"> Adresse Ip Actuelle </label>
             <div class="controls">
                 <%= f.text_field :currentaddress, :class => "input-xlarge", :maxlength => "100" %>
             </div>
@@ -86,11 +89,24 @@
 			</div>
         </div>
 		<div class="control-group">
-            <label for="site_id" class="control-label">Site d'instalation</label>
+            <label for="site_id" class="control-label">Site d'installation</label>
             <div class="controls">
                 <%= f.select :site_id, Site.all.collect{|c| [ c.name, c.id ] }, :prompt => 'Select Site' %>
             </div>
         </div>
+		<div class="control-group">
+            <label for="usedhcp" class="control-label">Activer le DHCP</label>
+            <div class="controls">
+                <%= f.check_box :usedhcp %>
+            </div>
+        </div>
+		<div class="control-group">
+            <label for="useproxy" class="control-label">Utiliser le Proxy</label>
+            <div class="controls">
+                <%= f.check_box :useproxy %>
+            </div>
+        </div>
+	
     </div>   
     <div id="configcible" class="tab-pane">
 		<div class="control-group">
@@ -113,6 +129,27 @@
                 <%= f.text_area :information, :rows => 10, :cols => 40, :class => "input-xxlarge" %>
             </div>
         </div>
+    </div>
+	<div id="congigstatic" class="tab-pane">Configuration OS
+        <div class="control-group">
+            <label for="lastgeneratedinstallscript" class="control-label">OS</label>
+            <div class="controls">
+                <%= f.text_area :lastgeneratedinstallscript, :rows => 10, :cols => 40, :class => "input-xxlarge" ,disabled: 'disabled' %>
+            </div>
+        </div>
+		<div class="control-group">
+            <label for="lastgeneratedpostinstallsctipt" class="control-label">Post-installation</label>
+            <div class="controls">
+                <%= f.text_area :lastgeneratedpostinstallsctipt, :rows => 10, :cols => 40, :class => "input-xxlarge" ,disabled: 'disabled' %>
+            </div>
+        </div>
+		<div class="control-group">
+            <label for="configlock" class="control-label">Figer la configuration</label>
+            <div class="controls">
+             <%= f.check_box :configlock %>
+           </div>
+        </div>
+		
     </div>
 </div>
 <div class="actions">

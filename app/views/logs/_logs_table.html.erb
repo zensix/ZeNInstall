@@ -1,0 +1,34 @@
+<%= hidden_field_tag :direction, params[:direction] %>
+<%= hidden_field_tag :sort, params[:sort] %>
+
+<table class="table table-striped table-bordered table-condensed sortable">
+    <thead>
+        <tr>
+            <th style="width: 100px;">Date</th>
+            <th style="width: 10px;">Crit</th>
+			<th style="width: 500px;">Message</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% @logs.each do |log| %>
+        <tr>
+		    <td valign="top"> 
+                <%= log.date %> 
+            </td>
+    
+            <td valign="top"> 
+                <%= log.crit %> 
+            </td>
+			 <td valign="top"> 
+                <%= log.message %> 
+            </td>
+
+        </tr>
+        <% end %>
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="3"> <%= will_paginate @log%> </td>
+        </tr>
+    </tfoot>
+</table>
