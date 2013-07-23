@@ -187,9 +187,9 @@ ActiveRecord::Schema.define(:version => 20130720192509) do
     t.text     "information"
     t.datetime "created_at",                     :null => false
     t.datetime "updated_at",                     :null => false
-    t.text     "lastgeneratedpostinstallsctipt"
     t.text     "lastgeneratedinstallscript"
     t.boolean  "configlock"
+    t.text     "lastgeneratedpostinstallsctipt"
     t.index ["systeminstallscript_id"], :name => "index_servers_on_systeminstallscript_id"
     t.index ["postinstallscript_id"], :name => "index_servers_on_postinstallscript_id"
     t.index ["system_id"], :name => "index_servers_on_system_id"
