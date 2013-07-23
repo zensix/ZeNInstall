@@ -24,10 +24,10 @@ class EngineController < ApplicationController
 	sitedest=Site.find(server[:sitedestination])
     global=generateglobal
  #   boucle de remplacement
-    templatescript.scan(/(<%=\s*@\w+.\w+\s*%>)/) { |m|
+    templatescript.scan(/(@\w+\[:\w+\])/) { |m|
       logger.info "Traitement de #{m}"
-      source=m[0].to_s.sub(/<%=\s*@(\w+).\w+\s*%>/,'\1')
-      param=m[0].to_s.sub(/<%=\s*@\w+\.(\w+)\s*%>/,'\1')
+      source=m[0].to_s.sub(/@(\w+)\[:\w+\]/,'\1')
+      param=m[0].to_s.sub(/@\w+\[:(\w+)\]/,'\1')
       if source == "global" then
         logger.info "Source #{source} Param =[#{param}] Value=[#{global[param]}]"
         outputscript.sub!(m[0].to_s,global[param])
