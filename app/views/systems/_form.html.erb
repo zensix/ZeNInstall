@@ -42,14 +42,14 @@
 <div class="control-group <%= 'error' if @system.errors[:kernelpath].present? %>">
     <label for="kernelpath" class="control-label">kernelpath</label>
     <div class="controls">
-        <%= f.text_field :kernelpath, :class => "input-xlarge", :maxlength => "50" %>
+        <%= f.text_field :kernelpath, :class => "input-xlarge", :maxlength => "100" %>
     </div>
 </div>
 
 <div class="control-group <%= 'error' if @system.errors[:initrdpath].present? %>">
     <label for="initrdpath" class="control-label">initrdpath</label>
     <div class="controls">
-        <%= f.text_field :initrdpath, :class => "input-xlarge", :maxlength => "50" %>
+        <%= f.text_field :initrdpath, :class => "input-xlarge", :maxlength => "100" %>
     </div>
 </div>
 
@@ -57,7 +57,7 @@
 <div class="control-group <%= 'error' if @system.errors[:repository].present? %>">
     <label for="repository" class="control-label">repository</label>
     <div class="controls">
-        <%= f.text_field :repository, :class => "input-xlarge", :maxlength => "50" %>
+        <%= f.text_field :repository, :class => "input-xlarge", :maxlength => "100" %>
     </div>
 </div>
 

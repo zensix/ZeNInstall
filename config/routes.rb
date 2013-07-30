@@ -43,6 +43,7 @@ CustomeR::Application.routes.draw do
   get "engine/setstatusfinish"
   get "engine/getdestinationscript"
   get "engine/getprojectionscript"
+  get "engine/getesxiboot"
   get "engine/test"
   
   match '/getpostconfigscript/:uuid', :to => 'engine#getpostconfigscript'
@@ -51,6 +52,7 @@ CustomeR::Application.routes.draw do
   match '/getosinstalls/:uuid', :to => 'engine#getosinstallscript'
   match '/getipxescript/:uuid',  :to => 'engine#getipxescript'
   match '/setstatusfinish/:uuid',  :to => 'engine#setstatusfinish'
+  match '/getesxiboot/:uuid' , :to => 'engine#getesxiboot'
   match '/view_server_ipxescript/:id', :to => 'engine#view_server_ipxescript'
   match '/view_server_osinstallscript/:id', :to => 'engine#view_server_osinstallscript'
   match '/view_server_postinstallscript/:id', :to => 'engine#view_server_postconfigscript'
@@ -59,6 +61,7 @@ CustomeR::Application.routes.draw do
   match '/view_server_projectionscript/:id', :to => 'engine#view_server_projectionscript'
   match '/engine/test/:id' , :to => 'engine#test'
   match '/test/:id' , :to => 'engine#test'
+ 
   
 
   # The priority is based upon order of creation:

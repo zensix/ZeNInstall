@@ -174,6 +174,7 @@ end
         end
         server.save
         script=generateipxescript( server )
+		logger.info "#{script}"
         render :text => script
   end
 
@@ -340,7 +341,26 @@ end
         end
    end
 
-
+   def getesxiboot
+   logger.info "----------- APPEL ESXI BOOT ---------------------"
+    params[:uuid].gsub!(/ /,"-")
+    params[:uuid].gsub!(/%20/,"-")
+		
+    server = Server.find(params[:uuid])
+	global=generateglobal
+	system = System.find(server[:system_id])
+	site=Site.find(server[:site_id])
+	sitedest=Site.find(server[:sitedestination])
+	famille=Famille.find(system[:famille_id])
+	logger.info "----------- Debut de generation du script---------------------"
+	temp="title=Loading ESX installer\n"
+	temp=temp+"kernel=http://#{global[:esxi_boot_server]}/#{system[:repository]}/tboot.b00\n"
+	temp=temp+"kernelopt=ks=#{global[:kickstart_protocol]}://#{global[:kickstart_server]}/#{global[:kickstart_call]}/#{params[:uuid]}\n"
+	temp=temp+"modules=http://#{global[:esxi_boot_server]}/#{system[:repository]}/b.b00 --- http://#{global[:esxi_boot_server]}/#{system[:repository]}/useropts.gz --- http://#{global[:esxi_boot_server]}/#{system[:repository]}/k.b00 --- http://#{system[:repository]}/a.b00 --- http://#{global[:esxi_boot_server]}/#{system[:repository]}/s.v00 --- http://#{global[:esxi_boot_server]}/#{system[:repository]}/weaselin.v00 ---http://#{global[:esxi_boot_server]}/#{system[:repository]}/tools.t00 --- http://#{global[:esxi_boot_server]}/#{system[:repository]}/imgdb.tgz --- http://#{global[:esxi_boot_server]}/#{system[:repository]}/imgpayld.tgz"
+	 logger.info "Script boot esxi: #{temp}"
+	temp
+	end
+	
    def test
 	
      @data="toto"
