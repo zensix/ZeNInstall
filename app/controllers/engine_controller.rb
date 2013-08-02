@@ -1,5 +1,5 @@
 class EngineController < ApplicationController
-
+  require 'erb'
   def generateglobal
     global= Hash.new
     tmp=Globalparameter.find(:all,:select => "name,value" )
@@ -37,6 +37,21 @@ class EngineController < ApplicationController
 	temp=temp+"#--------------------------------------------------------------------------\n"
 	temp
   end
+  
+  def rendercodemodule(server,codemodule)
+  logger.info "In  rendercodemodule #{server} #{codemodule}"
+	@global=generateglobal
+	
+	@system = System.find(server[:system_id])
+	@site=Site.find(server[:site_id])
+	@sitedest=Site.find(server[:sitedestination])
+	@famille=Famille.find(@system[:famille_id])
+	@datetime=DateTime.current().to_s 
+	logger.info "init OK"
+	codemodule=Codemodule.find_by_name(codemodule)
+	result = ERB.new(codemodule[:code]).result(binding)
+	result
+ end
   
   def module_postinstallos(uuid)
     global=generateglobal
@@ -89,9 +104,11 @@ end
 	# Remplacement des modules ( format @@module_<nom>
 	templatescript.scan(/(@@module_\w+)/) { |m|
 		 logger.info "Traitement de #{m}"
-		 modulename=m[0].to_s.sub(/@@(module_\w+)/,'\1')
+	#	 modulename=m[0].to_s.sub(/@@(module_\w+)/,'\1')
+	modulename=m[0].to_s.sub(/@@module_(\w+)/,'\1')
 		 logger.info "Traitement du module #{modulename}"
-		 code = eval "#{modulename}('#{server.uuid}')"
+	#	 code = eval "#{modulename}('#{server.uuid}')"
+		code=rendercodemodule(server,modulename)
 		 outputscriptmodule.sub!(m[0].to_s,"#{code}")
 	}
  #   Remplacement des variables @domain[:valeur]
@@ -214,27 +231,27 @@ end
     params[:uuid].gsub!(/ /,"-")
     params[:uuid].gsub!(/%20/,"-")
 
-    server = Server.find_by_uuid(params[:uuid])
+   @server = Server.find_by_uuid(params[:uuid])
 	
-    if( server[:currentaddress] != request.remote_ip )
-           server[:currentaddress] = request.remote_ip
+    if( @server[:currentaddress] != request.remote_ip )
+           @server[:currentaddress] = request.remote_ip
     end
     if params[:mac]
-       server[:mac] = params[:mac]
+       @server[:mac] = params[:mac]
     end
-	logaction("info","Server: #{server.name} #{server[:currentaddress]} :Request OS")
-	server[:etat_id] = Etat.find_by_name("Encours")[:id]
-    server.save
-	if( server[:configlock] == false )
+	logaction("info","Server: #{@server.name} #{@server[:currentaddress]} :Request OS")
+	@server[:etat_id] = Etat.find_by_name("Encours")[:id]
+    @server.save
+	if( @server[:configlock] == false )
 
-		script=generateOSinstallscript(server)
+		script=generateOSinstallscript(@server)
 		script= "### Generation ZeNInstalle en date du : " + Time.now.to_s + "###\n" + script
-		server[:lastgeneratedinstallscript] = script;
+		@server[:lastgeneratedinstallscript] = script;
 		script.gsub!(/\r/,'')
-		server.save
+		@server.save
 	else
-		logaction("info","Envoie de la configuration statique a  #{server.name}")
-		script=server[:lastgeneratedinstallscript]
+		logaction("info","Envoie de la configuration statique a  #{@server.name}")
+		@script=@server[:lastgeneratedinstallscript]
 	end
     
 	logger.info "#{script}" 

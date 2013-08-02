@@ -36,6 +36,7 @@ CustomeR::Application.routes.draw do
   resources :projectionscripts, :only => [:index, :new, :edit, :create, :update, :destroy]
   resources :servers, :only => [:index, :new, :edit, :create, :update, :destroy]
   resources :logs, :only => [:index, :new, :edit, :create, :update ]
+  resources :codemodules, :only => [:index, :new, :edit, :create, :update ]
   
   get "engine/getipxescript"
   get "engine/getosinstallscript"
